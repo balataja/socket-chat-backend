@@ -13,8 +13,9 @@ var io = socketIO(server)
 app.use(express.static(publicPath))
 
 io.on('connection', (socket) => {
-    socket.emit('newUser', generateMessage('James', 'Welcome to the chat app.'))
-    socket.broadcast.emit('newUserBroadcast', generateMessage('James', 'New User joined.'))
+    socket.on('connect', () => {
+        console.log('User connected')
+    })
 
     socket.on('disconnect', () => {
         console.log('User disconnected')
